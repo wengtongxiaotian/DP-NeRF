@@ -1,20 +1,24 @@
+#CUDA_VISIBLE_DEVICES=2 python run_dpnerf.py --config config_success.txt --expname test
 num_gpu = 1
-expname = blurpool1_full_wodepth_woprior
+expname = defocusdaisy1_full_wodepth_woprior
 basedir = ./logs
-datadir = ./dataset/deblurnerf_dataset/synthetic_camera_motion_blur/blurpool
 datadir = /home/wtxt/share-backup/defocusdaisy/
+datadir = /home/wtxt/share-backup/dataset_halfglass/
 tbdir = ./logs_tb
 dataset_type = llff
 
-factor = 4
+factor = 2
 llffhold = 8
 
-N_rand = 324
+N_rand = 1500
 N_samples = 64
 N_importance = 64
 N_iters = 200000
 lrate = 5e-4
 lrate_decay = 250
+i_weights = 2200 #
+i_testset = 1100 #
+i_video = 66000
 
 use_viewdirs = True
 raw_noise_std = 1e0
@@ -22,11 +26,9 @@ rgb_activate = sigmoid
 
 blur_model_type = dpnerf
 
-kernel_start_iter = 1200
+kernel_start_iter = 1200 #1200
 tone_mapping_type = gamma
-render_focuspoint_scale = 3.
-render_radius_scale = 0.9
-render_rmnearplane = 80
+render_rmnearplane = 30
 
 use_dpnerf
 

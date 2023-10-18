@@ -7,6 +7,7 @@ from tensorboardX import SummaryWriter
 
 # from NeRF import *
 from models.dpnerf import *
+from models.dpnerf import NeRFAll
 from data_utils.load_llff import load_llff_data
 from utils.run_dpnerf_helpers import *
 from utils.metrics import compute_img_metric
@@ -749,5 +750,6 @@ def train():
 
 if __name__ == '__main__':
     torch.set_default_tensor_type('torch.cuda.FloatTensor')
+    torch.autograd.set_detect_anomaly(True)
     train()
 

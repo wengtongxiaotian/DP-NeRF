@@ -29,7 +29,8 @@ class SE3Field():
                         trans: N_rays*N_samples x 3
         '''
         theta = torch.linalg.norm(rot, axis=-1) # N_rays*N_samples
-        theta += 1.0e-10
+        theta = theta + 1.0e-10
+        # theta = rot.mean(-1)
         rot = rot / theta.unsqueeze(-1) # N_rays*N_samples x 3
         trans = trans / theta.unsqueeze(-1) # N_rays*N_samples x 3
         screw_axis = torch.cat([rot, trans], axis=-1) # N_rays*N_samples x 6

@@ -33,7 +33,7 @@ class View_Embedding(nn.Module):
         
     def forward(self, x):
         return self.view_embed_layer(x)
-
+import pdb;pdb=pdb.set_trace
 class Rigid_Blurring_Kernel(nn.Module):
     def __init__(self, D, W, D_r, W_r, D_v, W_v, D_w, W_w,
                  output_ch_r, output_ch_v, input_ch, skips, rv_window, 
@@ -597,7 +597,7 @@ class NeRFAll(nn.Module):
                         
                     else:
                         rgb, depth, acc, extras = self.mlp_rbk.rbk_weighted_sum(rgb, depth, acc, extras, ccw)
-                        return self.tonemapping(rgb), self.tonemapping(extras['rgb0']), 
+                        return self.tonemapping(rgb), self.tonemapping(extras['rgb0']), {}
                         
                 else:
                     rgb, depth, acc, extras = self.render(H, W, K, chunk, rays, **kwargs)
