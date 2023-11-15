@@ -1,3 +1,7 @@
+import sys
+sys.path.append('.')
+sys.argv.extend(['--config', 'DP-NeRF/config_chip.txt', '--wtxt', 'cuda-0_group-dpnerfchip'])
+import tool
 import os
 import time
 
@@ -235,6 +239,8 @@ def config_parser():
     
     parser.add_argument("--save_warped_ray_img", action='store_true',
                         help='save_warped_ray_img')
+    parser.add_argument("--wtxt", type=str, default='none',
+                        help='user config')
     return parser
 
 
@@ -299,9 +305,9 @@ def train():
         render_poses = np.array(poses)
 
     # Create log dir and copy the config file
-    basedir = args.basedir
-    tensorboardbase = args.tbdir
-    expname = args.expname
+    basedir = os.path.dirname(tool.exec_dir)
+    tensorboardbase = basedir
+    expname = tool.exec_id
     test_metric_file = os.path.join(basedir, expname, 'test_metrics.txt')
     os.makedirs(os.path.join(basedir, expname), exist_ok=True)
     os.makedirs(os.path.join(tensorboardbase, expname), exist_ok=True)
